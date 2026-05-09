@@ -93,6 +93,58 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 - Website - [https://nestjs.com](https://nestjs.com/)
 - Twitter - [@nestframework](https://twitter.com/nestframework)
 
+## Project setup steps:
+Install nest packages
+```bash
+npm install -g @nestjs/cli
+```
+
+Create new project
+```bash
+nest new microservices-shopping-nest
+cd microservices-shopping-nest
+```
+
+Create microservices as monorepo apps
+```bash
+nest generate app product
+nest generate app order
+nest generate app users
+nest generate app api-gateway
+```
+
+Install microservices packages
+```bash
+npm install @nestjs/microservices
+```
+
+Generate controller for Order service
+```bash
+cd apps/api-gateway 
+nest generate controller order
+```
+
+Start product apps
+```bash
+cd microservices-shopping-nest
+npm run start:dev api-gateway
+npm run start:dev order
+npm run start:dev product
+npm run start:dev users
+```
+
+Test application using postman:
+```bash
+http://localhost:4000/order
+Output: 
+{
+   "status": "Order created successfully",
+   "data": {
+       "name": "Order 2"
+   }
+}
+```
+
 ## License
 
 Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
